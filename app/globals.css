@@ -13,25 +13,47 @@
 
 }
 
-.page-title {
+h1 , .page-title {
   align-items: center;
   text-align: center;
   gap: 0.5rem/* 8px */;
   font-size: 1.50rem/* 20px */;
   line-height: 1.75rem/* 28px */;
   font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.page-subtitle {
+h2 , .page-subtitle {
+  align-items: center;
+  text-align: center;
+  gap: 0.3rem;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+  font-weight: 400;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.menu-title {
   align-items: center;
   text-align: center;
   gap: 0.4rem;
-  font-size: 1.3rem;
-  line-height: 1.5rem;
-  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1rem;
+  font-weight: 600;
 }
 
-.page-content {
+.menu-subtitle {
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  font-weight: 600;
+}
+
+p, .page-content {
   align-items: center;
   text-align: center;
   gap: 0.3rem;

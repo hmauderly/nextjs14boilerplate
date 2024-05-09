@@ -5,6 +5,7 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/flowbite/**/*.js",
   ],
   theme: {
     extend: {
@@ -15,9 +16,17 @@ const config: Config = {
       },
       colors: {
         menu: '#c7b48f',
+        menuhover: '#d0c4ae',
         main: '#FFFFFF',
         footer: '#000000',
       },
+      screens: {
+
+        'md': '900px',
+        // => @media (min-width: 768px) { ... }
+
+
+      }
     },
   },
   daisyui: {
@@ -25,6 +34,8 @@ const config: Config = {
   },
   plugins: [
     require('daisyui'),
+    require('flowbite/plugin'),
   ],
+
 };
 export default config;

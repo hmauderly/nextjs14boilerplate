@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "flowbite": "^2.3.0",
     "json-server": "^1.0.0-alpha.23",
     "next": "14.2.3",
     "react": "^18",
