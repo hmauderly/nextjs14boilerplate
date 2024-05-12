@@ -17,9 +17,9 @@ h1 , .page-title {
   align-items: center;
   text-align: center;
   gap: 0.5rem/* 8px */;
-  font-size: 1.50rem/* 20px */;
+  font-size: 1.20rem/* 20px */;
   line-height: 1.75rem/* 28px */;
-  font-weight: 600;
+  font-weight: 200;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -34,7 +34,16 @@ h2 , .page-subtitle {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-
+h3 , .page-subsubtitle {
+  align-items: center;
+  text-align: center;
+  gap: 0.3rem;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+  font-weight: 400;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 .menu-title {
   align-items: center;
   text-align: center;

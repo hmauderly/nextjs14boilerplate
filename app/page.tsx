@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import "./globals.css";
-import Menu2 from "@/app/ui/Menu2";
+import Menu from "@/app/ui/Menu";
 import Footer from "@/app/ui/Footer";
 
 const getData = async () => {
     // Revalidation
     const res = await fetch("http://localhost:4000/articles", {
         next: {
-            revalidate: 0,
+            revalidate: 60,
         },
     });
     const data = await res.json();
@@ -31,9 +31,9 @@ export default async function Home() {
 
 
     return (
-        <main className="container flex-row w-full  mx-auto">
-            <Menu2 title="A new title"/>
-            <div className="container w-5/6 flex  flex-col items-center  justify-center mt-10 mx-auto">
+        <main className=" ">
+            <Menu title="A new title"/>
+            <div className="container  w-5/6 flex  flex-col items-center  justify-center mt-40 mx-auto">
                 <p className="font-bold">Plongez dans la diversité des croyances mondiales à travers des articles approfondis, des événements
                     religieux, et une vaste collection de ressources éducatives pour une exploration complète des
                     religions du monde.</p>
@@ -46,11 +46,10 @@ export default async function Home() {
                     alt="Religio.fr"
                 />
 
-                <h3>Christianisme - Bible (Évangile selon Jean 3:16)</h3>
-                <p className="py-4">
+                <h3 className="">Christianisme - Bible (Évangile selon Jean 3:16)</h3>
+                <p className="py-4 ">
 
-                    Texte original (Grec ancien) :"οὕτως γὰρ ἠγάπησεν ὁ θεὸς τὸν κόσμον, ὥστε τὸν υἱὸν τὸν μονογενῆ
-                    ἔδωκεν, ἵνα πᾶς ὁ πιστεύων εἰς αὐτὸν μὴ ἀπόληται ἀλλ’ ἔχῃ ζωὴν αἰώνιον."
+                    Texte original (Grec ancien) :"οὕτως γὰρ ἠγάπησεν ὁ θεὸς τὸν κόσμον, ὥστε τὸν υἱὸν τὸν μονογενῆ ἔδωκεν, ἵνα πᾶς ὁ πιστεύων εἰς αὐτὸν μὴ ἀπόληται ἀλλ’ ἔχῃ ζωὴν αἰώνιον."
                     Traduction française :"Car Dieu a tant aimé le monde qu’il a donné son fils unique, afin que
                     quiconque croit en lui ne périsse pas, mais ait la vie éternelle."
                 </p>
@@ -124,7 +123,7 @@ export default async function Home() {
                 {
                     // Affichage des données
                     articles.map((article: Article) => (
-                        <div key={article.id} className="card w-96 m-4 shadow-xl">
+                        <div key={article.id} className=" w-96 m-4 shadow-xl">
                             <figure>
                                 <Image
                                     src={article.lienImage}

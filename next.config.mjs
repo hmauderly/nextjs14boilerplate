@@ -3,6 +3,7 @@
 
 const nextConfig = {
     // Just to ensure that React is always on strict mode
+
     reactStrictMode: true,
     // We intentionally disable Next.js's built-in i18n support
     // as we dom have our own i18n and internationalisation engine
@@ -74,5 +75,8 @@ const nextConfig = {
         // Removes the warning regarding the WebPack Build Worker
         webpackBuildWorker: false,
     },
+
+
+
 };
 export default nextConfig;
