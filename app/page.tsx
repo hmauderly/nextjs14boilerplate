@@ -5,6 +5,7 @@ import "./globals.css";
 import Menu from "@/app/ui/Menu";
 import Footer from "@/app/ui/Footer";
 
+
 const getData = async () => {
     // Revalidation
     const res = await fetch("http://localhost:4000/articles", {
@@ -16,14 +17,7 @@ const getData = async () => {
     return data;
 };
 
-type Article = {
-    id: number;
-    titre: string;
-    contenu: string;
-    date: string;
-    user_id: number;
-    lienImage: string;
-};
+t
 
 export default async function Home() {
     // console.log("Test de composant");

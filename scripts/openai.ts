@@ -1,10 +1,11 @@
 import OpenAI from 'openai';
 import dotenv from 'dotenv';
-dotenv.config();  // Load environment variables from .env file
 const inputText = process.argv[2];
 const OPENAI_KEY = process.env.OPENAI_KEY;
 const OPENAI_PROJECT = process.env.OPENAI_PROJECT;
 const OPENAI_ORG = process.env.OPENAI_ORG;
+
+dotenv.config();  // Load environment variables from .env file
 
 const openai = new OpenAI({
     apiKey: OPENAI_KEY,

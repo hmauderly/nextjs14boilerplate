@@ -16,8 +16,25 @@ const raleway = Raleway({ subsets: ["latin"] });
 
 
 export const metadata: Metadata = {
-  title: "Religio",
-  description: "Plongez dans la diversité des religions et croyances mondiales",
+  category: 'Religion',
+
+  alternates: {
+    canonical: '/',
+    languages: {
+      'fr-FF': '/fr-FR',
+    },
+
+  },
+  verification: {
+    google: 'google',
+    yandex: 'yandex',
+    yahoo: 'yahoo',
+    other: {
+      me: ['my-email', 'my-link'],
+    },
+  },
+
+
 };
 
 export default function RootLayout({

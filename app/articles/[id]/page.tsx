@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import {getPageById} from "@/app/components/strapi/getPageById";
-import {getPageBySlug} from "@/app/components/strapi/getPageBySlug";
+import {getPageBySlug} from "@/app/components/strapi/getpagebyslug";
 
 
 type Props = {
@@ -21,20 +21,11 @@ const getData = async (id: number) => {
 export default async function page({ params }: Props) {
 
     const article = await getData(params.id);
-    const article2 = await getPageById(2);
-    const article3 = await getPageBySlug("kkkk");
 
-    console.log(article2);
-    console.log(article3);
+
     return (
         <div className="container">
-            {/* <Image
-        src={article.lienImage}
-        width={250}
-        height={250}
-        alt="Shoes"
-        className="w-full rounded-md mb-2"
-      /> */}
+
             <h1 className="titre">{article.titre}</h1>
             <p>{article.contenu}</p>
 
