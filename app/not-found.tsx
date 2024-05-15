@@ -1,15 +1,19 @@
 import React from "react";
 import Menu from "@/app/ui/Menu";
 import Footer from "@/app/ui/Footer";
+import Link from "next/link";
 
 type Props = {};
 
 export default function NotFound({}: Props) {
     return (
-        <main className="container flex-row w-full  mx-auto">
-            <Menu title="A new title"/>
-            <div className="container w-5/6 flex  flex-col items-center  justify-center mt-10 mx-auto">
-                SUB
+        <main>
+
+            <Menu/>
+            <div className="h-screen container  w-5/6 flex  flex-col items-center  justify-top mx-auto my-32">
+                <h2 className="my-4 text-3xl font-bold">Page not found !</h2>
+                <Link href={"/"}>Back to home</Link>
+
             </div>
             <Footer/>
         </main>

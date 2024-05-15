@@ -6,9 +6,10 @@ function hasData(json: any, key: string): boolean {
 }
 
 
-export const getPage = async (slug: string[]) => {
+export const getArticles = async () => {
 
-    const url = new URL(API_URL + "/api/pages?filters[slug][$eq]=" + slug[slug.length-1]+"&populate=*");
+    const url = new URL(API_URL + "/api/articles?sort[0]=id:desc&fields[0]=title&fields[1]=PublishDate&fields[2]=description");
+   console.log(url.href)
     const options = {
         headers: {
             'Authorization': `Bearer ${TOKEN}`
@@ -24,7 +25,7 @@ export const getPage = async (slug: string[]) => {
         }
 
         const content = await response.json();
-        let result = hasData(content, 'data') && (content.data[0].attributes.slug === slug[slug.length - 1]);
+        let result = hasData(content, 'data');
 
         if (result) return content;
         else {

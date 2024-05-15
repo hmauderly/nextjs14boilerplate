@@ -17,7 +17,7 @@ const getData = async () => {
     return data;
 };
 
-t
+
 
 export default async function Home() {
     // console.log("Test de composant");

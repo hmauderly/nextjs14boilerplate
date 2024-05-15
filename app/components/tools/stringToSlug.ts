@@ -10,6 +10,7 @@ export const stringToSlug = (inputText :string) => {
         .replace(/\s+/g, '-');
 
     slug = slug.split(' ').join('-');
+
     return slug;
 };
 

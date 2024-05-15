@@ -23,6 +23,9 @@ h1 , .page-title {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+.dropdownHoverButton:hover .dropdownHover {
+  display: block;
+}
 
 h2 , .page-subtitle {
   align-items: center;
@@ -69,4 +72,7 @@ p, .page-content {
   font-size: 1rem;
   line-height: 1.2rem;
   font-weight: 400;
+}
+.article a {
+  @apply underline  hover:text-blue-500
 }

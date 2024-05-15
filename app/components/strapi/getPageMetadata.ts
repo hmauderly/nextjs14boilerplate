@@ -1,11 +1,24 @@
+import {redirect} from "next/navigation";
+import { NotFound } from 'next/navigation';
+
 const API_URL = process.env.STRAPI_API_URL;
 const TOKEN = process.env.STRAPI_API_TOKEN;
+
+function hasData(json: any, key: string): boolean {
+    // Vérifie si la clé 'data' existe et contient au moins un élément
+    if (json[key] && Array.isArray(json[key]) && json[key].length > 0) {
+        // Vous pouvez ajouter plus de validations ici si nécessaire
+        return true;
+    }
+    return false;
+}
+
+
 
 // export async function getPageBySlug(id: number) {
 export const getPageMetadata = async (slug: string) => {
 
-
-    const url = new URL(API_URL + "/api/pages?filters[slug][$eq]=" + slug[slug.length-1]+"&fields[0]=title&fields[1]=description&fields[2]=keywords");
+    const url = new URL(API_URL + "/api/articles?sort[0]=id:desc&fields[0]=title&fields[1]=PublishDate&fields[2]=description");
 
     const options = {
         headers: {
@@ -13,7 +26,6 @@ export const getPageMetadata = async (slug: string) => {
         },
         cache: 'no-store',
         revalidate: 0,
-
     };
 
 
@@ -25,10 +37,17 @@ export const getPageMetadata = async (slug: string) => {
         }
         const page = await response.json();
 
-        return page;
+        const result = hasData(page, 'data');
+        if (result) return page;
+        else {
+            page.status = 404;
+            page.ok = false;
+            return page
+        }
     } catch (e) {
         console.error("There was a problem retrieving articles:", e);
-        return [];
+        return {status: 500, ok: false};
+
     }
 };
 
