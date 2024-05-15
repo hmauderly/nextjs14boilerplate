@@ -23,3 +23,17 @@ interface BreadcrumbItem {
     slug: string;
     title: string;
 }
+
+export interface Article {
+
+    title : string;
+    content : string;
+    metaDescription : string;
+    PublishDate : string;
+    metaKeywords : string;
+    htmlContent:string;
+    htmlSummary:string;
+
+
+
+}

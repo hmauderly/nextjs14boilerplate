@@ -28,7 +28,6 @@ export const fillPageFromContent = async (content, slug:[]) => {
     if ((categoryParents.status === 200) && categoryParents.ok) {
         page.categoryParents = concat([...categoryParents.parents.filter(item => item !== 'Home').reverse(), page.categoryName, page.title]);
         page.ok = true;
-        page.ok = true;
         page.fullpath = '/' + page.fullslug.join('/');
         let converter = new showdown.Converter();
         page.htmlContent  = converter.makeHtml(page.content);

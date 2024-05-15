@@ -1,38 +1,62 @@
-import Image from "next/image";
+import Link from "next/link";
 import React from "react";
-import {getPageById} from "@/app/components/strapi/getPageById";
-import {getPageBySlug} from "@/app/components/strapi/getpagebyslug";
+import Menu from "@/app/ui/Menu";
+import Breadcrumb from "@/app/ui/Breadcrumb";
+import Footer from "@/app/ui/Footer";
+import {getArticle} from "@/app/components/strapi/getArticle";
+import {fillArticleFromContent} from "@/app/components/tools/fileArticleFromContent";
+import {Article} from "@/app/interfaces/global";
+import {Props} from "next/dist/next-server/server/page";
+
+export default async function page({params}: Props) {
 
 
-type Props = {
-    params: {
-        id: number;
-    };
-};
+    let article: Article;
 
-const getData = async (id: number) => {
-    const res = await fetch(`http://localhost:4000/articles/${id}`);
-    const data = await res.json();
-    return data;
-};
+    try {
+        const content = await getArticle(params.id);
 
+        // Utilisez fillArticleFromContent pour remplir l'article
 
+        article = await fillArticleFromContent(content.data[0]);
+        console.log(article)
+    } catch (error) {
+        console.error('Error fetching article:', error);
+    }
 
-export default async function page({ params }: Props) {
+    const breadcrumb = [
 
-    const article = await getData(params.id);
-
+        {
+            title: "Articles",
+            slug: "articles"
+        },
+        {
+            title: article.title,
+            slug: "articles/"+article.id
+        }
+    ];
 
     return (
-        <div className="container">
+        <main>
+            <Menu/>
 
-            <h1 className="titre">{article.titre}</h1>
-            <p>{article.contenu}</p>
-
-            <div className="mt-3 bg-slate-400 text-indigo-500">
-                <span>{article.auteur}</span>
+            <div className="  w-5/6 flex  flex-col items-left justify-left mx-auto mt-24 ">
+                <Breadcrumb breadcrumb={breadcrumb}/>
             </div>
-        </div>
-    );
-}
 
+            <div className="h-full w-5/6 flex  flex-col items-center  justify-top mx-auto  ">
+
+                <h1 className="mt-10 text-3xl font-bold">{article.title}</h1>
+                <div className="article">
+                    <article className=" prose-base prose-img:p-6  prose-img:mx-auto">
+
+                        <div dangerouslySetInnerHTML={{__html: article.htmlContent}}></div>
+                    </article>
+                </div>
+            </div>
+
+            <Footer/>
+        </main>
+    )
+
+}

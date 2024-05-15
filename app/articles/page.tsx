@@ -7,8 +7,6 @@ import Footer from "@/app/ui/Footer";
 
 type Props = {};
 
-
-
 interface Article {
     id: number;
     attributes: {

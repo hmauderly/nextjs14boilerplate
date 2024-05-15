@@ -9,7 +9,7 @@ import {fillPageFromContent} from "@/app/components/tools/fillPageFromContent";
 import type {Metadata} from "next";
 import getPathFromSlug from "@/app/components/tools/getPathFromSlug";
 import {notFound} from "next/navigation";
-import {global} from "styled-jsx/css";
+
 
 
 export async function generateMetadata({params}): Promise<Metadata> {
@@ -21,7 +21,7 @@ export async function generateMetadata({params}): Promise<Metadata> {
     };
 
     const content = await getPageMetadata(params.slug);
-
+console.log(content)
     if (content.status === 500 && !content.ok )  return metadata;
     else if (content.status === 404 &&  !content.ok )  return metadata;
     else {

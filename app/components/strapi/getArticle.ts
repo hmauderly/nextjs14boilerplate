@@ -6,10 +6,10 @@ function hasData(json: any, key: string): boolean {
 }
 
 
-export const getArticles = async () => {
+export const getArticle = async (id:number) => {
 
-    const url = new URL(API_URL + "/api/articles?sort[0]=id:desc&fields[0]=title&fields[1]=PublishDate&fields[2]=description");
-
+    const url = new URL(API_URL + "/api/articles?filters[id][$eq]=" + id+"&populate=*");
+    console.log(url.href)
     const options = {
         headers: {
             'Authorization': `Bearer ${TOKEN}`
