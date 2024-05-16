@@ -21,10 +21,9 @@ export async function generateMetadata({params}): Promise<Metadata> {
     };
 
     const content = await getPageMetadata(params.slug);
-console.log(content)
-    if (content.status === 500 && !content.ok )  return metadata;
-    else if (content.status === 404 &&  !content.ok )  return metadata;
-    else {
+
+    if ((content.status === 200) && content.ok)
+    {
             metadata.title= content.data[0].attributes.Title;
             metadata.description= content.data[0].attributes.Description;
             metadata.alternates= {canonical: getPathFromSlug(params.slug)};

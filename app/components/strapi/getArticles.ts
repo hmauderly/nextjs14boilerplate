@@ -8,7 +8,7 @@ function hasData(json: any, key: string): boolean {
 
 export const getArticles = async () => {
 
-    const url = new URL(API_URL + "/api/articles?sort[0]=id:desc&fields[0]=title&fields[1]=PublishDate&fields[2]=description");
+    const url = new URL(API_URL + "/api/articles?sort[0]=id:desc&fields[0]=title&fields[1]=PublishDate&fields[2]=description&fields[3]=slug");
 
     const options = {
         headers: {

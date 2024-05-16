@@ -19,7 +19,7 @@ function hasData(json: any, key: string): boolean {
 export const getPageMetadata = async (slug: string) => {
 
     const url = new URL(API_URL + "/api/pages?filters[slug][$eq]=" + slug[slug.length-1]);
-console.log(url.href)
+
     const options = {
         headers: {
             'Authorization': `Bearer ${TOKEN}`

@@ -26,6 +26,9 @@ interface BreadcrumbItem {
 
 export interface Article {
 
+    id: number;
+    fullSlug:  string;
+    slug:  string;
     title : string;
     content : string;
     metaDescription : string;

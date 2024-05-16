@@ -33,7 +33,7 @@ export const getPageCategory = async (id: number) => {
         const content = await response.json();
 
         const valid = hasData(content, 'data');
-       // console.log(content.data);
+
         const parents:Parents = getCategoryParents(id, content.data);
 
         if (valid) {

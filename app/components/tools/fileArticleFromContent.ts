@@ -7,6 +7,9 @@ export const fillArticleFromContent = async (content:any) => {
 
     let article:Article ={
 
+        id : content.id,
+        slug :content.attributes.slug,
+        fullSlug: content.id + "-" + content.attributes.slug,
         title : content.attributes.Title,
         content : content.attributes.Content,
         metaDescription : content.attributes.Keywords,

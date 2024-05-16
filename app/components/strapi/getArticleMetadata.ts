@@ -6,9 +6,9 @@ function hasData(json: any, key: string): boolean {
 }
 
 
-export const getArticle = async (id:number, slug: string) => {
+export const getArticleMetadata = async (id:number, slug: string) => {
 
-    const url = new URL(API_URL + "/api/articles?filters[id][$eq]=" + id+"&populate=*");
+    const url = new URL(API_URL + "/api/articles?filters[id][$eq]=" + id);
     let content = null;
 
     const options = {

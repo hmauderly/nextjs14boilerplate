@@ -4,17 +4,11 @@ import {getArticles} from "@/app/components/strapi/getArticles";
 import Menu from "@/app/ui/Menu";
 import Breadcrumb from "@/app/ui/Breadcrumb";
 import Footer from "@/app/ui/Footer";
+import {Article} from "@/app/interfaces/global";
 
 type Props = {};
 
-interface Article {
-    id: number;
-    attributes: {
-        Title: string;
-        PublishDate: string;
-        Description: string;
-    };
-}
+
 // Mapper function
 const mapArticles = (articles: Article[]) => {
     return articles.map(article => {
@@ -22,7 +16,9 @@ const mapArticles = (articles: Article[]) => {
             id: article.id,
             title: article.attributes.Title,
             publishDate: new Date(article.attributes.PublishDate),
-            description: article.attributes.Description
+            description: article.attributes.Description,
+            fullSlug: article.id + "-"+article.attributes.slug,
+            slug: article.attributes.slug,
         };
     });
 };
@@ -40,14 +36,15 @@ export default async function page({}: Props) {
             console.log(`Title: ${article.title}`);
             console.log(`Publish Date: ${article.publishDate}`);
             console.log(`Description: ${article.description}`);
-            console.log('--------------------------------');
+            console.log(`Slug: , ${article.slug}`);
+            console.log(`fullSlug: , ${article.fullSlug}`);
         });
         mappedArticles.forEach((item, index) => {
             articlesList.push(
                 <li key={index}>
-                    <Link legacyBehavior href={`/articles/${item.id}`}>
+                    <Link legacyBehavior href={`/articles/${item.fullSlug}`}>
                         <a className="">
-                            {item.title}{item.description}
+                            {item.title}{item.description}${item.slug}
                         </a>
                     </Link>
                 </li>

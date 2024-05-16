@@ -8,7 +8,6 @@ interface SlugParams {
 
 export default function Breadcrumb({breadcrumb}:BreadcrumbItem) {
     let path="";
-    console.log(breadcrumb.length);
 
     let breadcrumbList = [];
 
