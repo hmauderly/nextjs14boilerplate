@@ -6,6 +6,7 @@ import Menu from "@/app/ui/Menu";
 import Footer from "@/app/ui/Footer";
 
 
+
 const getData = async () => {
     // Revalidation
     const res = await fetch("http://localhost:4000/articles", {

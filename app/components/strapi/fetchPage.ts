@@ -6,9 +6,14 @@ function hasData(json: any, key: string): boolean {
 }
 
 
-export const getArticleMetadata = async (id:number, slug: string) => {
+export const fetchPage = async (id:number, slug: string, filter:string, populate : boolean) => {
 
-    const url = new URL(API_URL + "/api/articles?filters[id][$eq]=" + id);
+    const populateString = populate ? "&populate=*" : "";
+    // If filter is id, we use the id, otherwise we use the last slug
+    const filterString = filter === "id" ? id : slug ;
+    // Compose Fect API url
+    const url = new URL(API_URL + "/api/pages?filters["+filter+"][$eq]=" + filterString+populateString);
+
     let content = null;
 
     const options = {
@@ -16,7 +21,7 @@ export const getArticleMetadata = async (id:number, slug: string) => {
             'Authorization': `Bearer ${TOKEN}`
         },
         cache: 'no-store',
-        revalidate: 0,
+        revalidate: 5,
     };
     try {
         const response = await fetch(url.href,options);
@@ -37,7 +42,11 @@ export const getArticleMetadata = async (id:number, slug: string) => {
             content.ok = true;
             return content;
         }
-        else return {status: 301, ok: false};
+        else  {
+            content.status = 301;
+            content.ok = false;
+            return content;
+        }
     }
     else return {status: 404, ok: false};
 };

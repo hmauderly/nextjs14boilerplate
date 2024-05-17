@@ -9,45 +9,39 @@ function hasData(json: any, key: string): boolean {
     }
     return false;
 }
-type Parents = string[];
+
 
 // export async function getPageBySlug(id: number) {
-export const getPageCategory = async (id: number) => {
+export const fetchPageCategory = async (id: number) => {
 
     const url = new URL(API_URL + "/api/categories?pagination[pageSize]=100&populate=*");
-
+    let content = null;
     const options = {
-        headers: {
-            'Authorization': `Bearer ${TOKEN}`
-        },
+        headers: {'Authorization': `Bearer ${TOKEN}`},
         cache: 'no-store',
         revalidate: 0,
     };
     try {
         const response = await fetch(url.href,options);
+        content = await response.json();
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-
-        const content = await response.json();
-
-        const valid = hasData(content, 'data');
-
-        const parents:Parents = getCategoryParents(id, content.data);
-
-        if (valid) {
-            return {status: 200, ok: true, parents}
-        }
-        else {
-            return {status: 404, ok: false, parents};
-        }
-
     } catch (e) {
-        console.error("There was a problem retrieving articles:", e);
-        return {status: 404, ok: false, parents: []};
+        console.error("There was a problem retrieving page category:", e);
+        throw new Error(`HTTP error! There was a problem retrieving page category`);
 
     }
+
+    const parents = getCategoryParents(id, content.data);
+
+    if (hasData(content, 'data')) {
+        return parents;
+    }
+    else throw new Error(`HTTP error! There was a problem retrieving page category`);
+
+
 };
 
 interface Category {

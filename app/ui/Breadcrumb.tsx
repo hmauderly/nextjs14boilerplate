@@ -1,14 +1,12 @@
 import React from "react";import Link from "next/link";
-import {BreadcrumbItem} from "@/app/interfaces/global";
-
-interface SlugParams {
-    slug: string[];
-}
+import {BreadcrumbItem} from "@/app/interfaces/BreadcrumbItem";
+import {BreadcrumbProps} from "@/app/interfaces/interfaces";
 
 
-export default function Breadcrumb({breadcrumb}:BreadcrumbItem) {
+const Breadcrumb: React.FC<BreadcrumbProps> = ({ breadcrumb }) => {
     let path="";
 
+    console.log("breadcrumb", breadcrumb)
     let breadcrumbList = [];
 
     breadcrumb.forEach((item, index) => {
@@ -56,4 +54,6 @@ export default function Breadcrumb({breadcrumb}:BreadcrumbItem) {
     )
 
 }
+
+export default Breadcrumb;
 

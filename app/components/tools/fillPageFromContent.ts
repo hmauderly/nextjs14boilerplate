@@ -1,14 +1,26 @@
 import showdown from 'showdown';
-import {Page} from "@/app/interfaces/global";
-import {getPageCategory} from "@/app/components/strapi/getPageCategory";
+import {fetchPageCategory} from "@/app/components/strapi/fetchPageCategory";
 import {concat} from "@tootallnate/quickjs-emscripten/dist/types";
 
-export const fillPageFromContent = async (content, slug:[]) => {
 
-    const categoryParents = await getPageCategory(content.attributes.category.data.id);
+export const fillPageFromContent = async (content, slug) => {
+   // slug: [ 'slug1', 'slug2',...., 'slugN']
 
-    let page:Page ={
-        fullslug : slug,
+    let categoryParents:string[] = [];
+    try {
+        categoryParents = await fetchPageCategory(content.attributes.category.data.id);
+
+    } catch (e) {
+        console.error("There was a problem retrieving categoryParents:", e);
+        throw new Error(`HTTP error! There was a problem retrieving fetchPageCategory`);
+
+    }
+    let breadcrumbItems = [];
+    if (typeof slug === "string") breadcrumbItems = ["articles",slug]; // this is an article whith slug = id-string
+    else if (Array.isArray(slug)) breadcrumbItems = slug; // this is a page with slug = [ 'slug1', 'slug2',...., 'slugN']
+
+    let page ={
+
         fullpath: "",
         title : content.attributes.Title,
         content : content.attributes.Content,
@@ -20,26 +32,24 @@ export const fillPageFromContent = async (content, slug:[]) => {
         htmlSummary:"",
         categoryId: content.attributes.category.data.id,
         categoryName: content.attributes.category.data.attributes.name,
-        ok: false,
-        categoryParents: [],
-        status:categoryParents.status,
-        breadcrumbItems: [],
+        breadcrumb: [[]],
+        Image: {
+            url : "",
+            name:"",
+        }
     };
-    if ((categoryParents.status === 200) && categoryParents.ok) {
-        page.categoryParents = concat([...categoryParents.parents.filter(item => item !== 'Home').reverse(), page.categoryName, page.title]);
-        page.ok = true;
-        page.fullpath = '/' + page.fullslug.join('/');
-        let converter = new showdown.Converter();
-        page.htmlContent  = converter.makeHtml(page.content);
-        page.htmlSummary  = converter.makeHtml(page.summary);
-    }
+
+    categoryParents = concat([...categoryParents.filter(item => item !== 'Home').reverse(), page.categoryName, page.title]);;
+    page.fullpath = '/' + breadcrumbItems.join('/');
+    let converter = new showdown.Converter();
+    page.htmlContent  = converter.makeHtml(page.content);
+    page.htmlSummary  = converter.makeHtml(page.summary);
 
 
-    page.breadcrumbItems = page.fullslug.map((slug, index) => ({
+    page.breadcrumb = <[]>breadcrumbItems.map((slug, index) => ({
         slug,
-        title: page.categoryParents[index]
+        title: categoryParents[index]
     }));
-
 
 
     return page;

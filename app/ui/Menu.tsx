@@ -2,7 +2,7 @@ import React from "react";
 import Script from "next/script";
 import Image from "next/image";
 
-export default function Menu(props: any) {
+export default function Menu() {
 
     return (
 
