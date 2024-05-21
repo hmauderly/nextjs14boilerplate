@@ -4,6 +4,7 @@ import React from "react";
 import "./globals.css";
 import Menu from "@/app/ui/Menu";
 import Footer from "@/app/ui/Footer";
+import Search from "@/app/ui/Search";
 
 
 
@@ -40,7 +41,7 @@ export default async function Home() {
                     className="m-2"
                     alt="Religio.fr"
                 />
-
+<Search/>
                 <h3 className="">Christianisme - Bible (Évangile selon Jean 3:16)</h3>
                 <p className="py-4 ">
 

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Raleway } from "next/font/google";
 import "./globals.css";
-import Menu from "@/app/ui/Menu";
 import React from "react";
+import Script from 'next/script'
 
 type Props = {
   params: {
@@ -16,8 +16,10 @@ const raleway = Raleway({ subsets: ["latin"] });
 
 
 export const metadata: Metadata = {
+  title: 'Religio.fr',
+  description:'Plongez dans la diversité des croyances mondiales à travers des articles approfondis, des événements religieux, et une vaste collection de ressources éducatives pour une exploration complète des religions du monde.',
   category: 'Religion',
-
+  robots: 'index, follow',
   alternates: {
     canonical: '/',
     languages: {
@@ -44,9 +46,25 @@ export default function RootLayout({
 }>) {
 
   return (
-    <html lang="fr" data-theme="cupcake">
+      <html lang="fr" data-theme="cupcake">
+      <head>
 
+        <Script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-E7NY2W59JZ"
+        />
+
+        <Script id="google-analytics">
+          {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', ${process.env.PUBLIC_GOOGLE_ANALYTICS}});
+          `}
+        </Script>
+      </head>
       <body className={raleway.className}>{children}</body>
-    </html>
+
+      </html>
   );
 }

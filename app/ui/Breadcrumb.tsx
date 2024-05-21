@@ -6,7 +6,7 @@ import {BreadcrumbProps} from "@/app/interfaces/interfaces";
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ breadcrumb }) => {
     let path="";
 
-    console.log("breadcrumb", breadcrumb)
+
     let breadcrumbList = [];
 
     breadcrumb.forEach((item, index) => {

@@ -9,6 +9,7 @@ import {notFound, permanentRedirect, redirect} from "next/navigation";
 import type {Metadata} from "next";
 import getPathFromId from "@/app/components/tools/getPathFromId";
 import {fetchPage} from "@/app/components/strapi/fetchPage";
+import {Article} from "@/app/interfaces/interfaces";
 
 
 
@@ -20,6 +21,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
         title: "",
         description: "",
         alternates: {canonical: ""},
+        robots: "index, follow",
     };
 
     const result = extractIdAndSlug(slug);
@@ -54,7 +56,7 @@ export default async function page(props: Props) {
 
 
     let content = null;
-    let page = null;
+    let article : Article;
 
     const result = extractIdAndSlug(props.params.slug);
     if (!result.id) return notFound();
@@ -79,7 +81,7 @@ export default async function page(props: Props) {
 
         try {
             // Get the article content
-            page = await fillPageFromContent(content.data[0],result.restOfSlug);
+            article = await fillPageFromContent(content.data[0],result.restOfSlug);
         } catch (error) {
             return Error();
         }
@@ -90,13 +92,13 @@ export default async function page(props: Props) {
         <main>
             <Menu/>
             <div className="  w-5/6 flex  flex-col items-left justify-left mx-auto mt-24 ">
-                <Breadcrumb breadcrumb={page.breadcrumb}/>
+                <Breadcrumb breadcrumb={article.breadcrumb}/>
             </div>
             <div className="h-full w-5/6 flex  flex-col items-center  justify-top mx-auto  ">
-                <h1 className="mt-10 text-3xl font-bold">{page.title}</h1>
+                <h1 className="mt-10 text-3xl font-bold">{article.title}</h1>
                 <div className="article">
                     <article className=" prose-base prose-img:p-6  prose-img:mx-auto">
-                        <div dangerouslySetInnerHTML={{__html: page.htmlContent}}></div>
+                        <div dangerouslySetInnerHTML={{__html: article.htmlContent}}></div>
                     </article>
                 </div>
             </div>

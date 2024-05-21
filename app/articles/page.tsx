@@ -5,9 +5,11 @@ import Menu from "@/app/ui/Menu";
 import Breadcrumb from "@/app/ui/Breadcrumb";
 import Footer from "@/app/ui/Footer";
 import ArticleItem from "@/app/ui/ArticleItem";
+import Pagination from "@/app/ui/Pagination";
 import type {Metadata} from "next";
-import {Article} from "@/app/interfaces/interfaces";
+import {ArticleSmall} from "@/app/interfaces/interfaces";
 
+const CATEGORY_ARTICLES = process.env.CATEGORY_ARTICLES;
 
 type Props = {};
 
@@ -19,6 +21,7 @@ export async function generateMetadata({params}): Promise<Metadata> {
         title: "Articles et Infos sur la Religion",
         description: "Découvrez les derniers articles et actualités sur la religion, couvrant divers événements et perspectives religieuses.",
         alternates: {canonical: process.env.BASE_URL + "/articles"},
+        robots: "index, follow",
     };
 
     return metadata;
@@ -34,6 +37,9 @@ const mapArticles = (data) => {
             publishDate: new Date(item.attributes.PublishDate),
             description: item.attributes.Description,
             slug: item.id + "-"+item.attributes.slug,
+            imageUrl: item.attributes.Image.data && item.attributes.Image.data.length > 0
+                ? item.attributes.Image.data[0].attributes.formats.thumbnail.url
+                : ""
 
         };
     });
@@ -41,24 +47,35 @@ const mapArticles = (data) => {
 export default async function page({}: Props) {
 
     const articlesList = [];
+    let pagination = {};
 
     try {
-        const data = await fetchPages(16);
+        const data = await fetchPages(CATEGORY_ARTICLES, 1, 10);
         const mappedArticles = mapArticles(data.data);
+        pagination = data.meta.pagination;
 
         mappedArticles.forEach((item, index) => {
-            const article:Article = {
+            const article:ArticleSmall = {
                 id: item.id,
                 title: item.title,
                 slug: item.slug,
                 PublishDate: item.publishDate,
                 description: item.description,
+                imageUrl: item.imageUrl,
             };
-            articlesList.push(<ArticleItem article={article}></ArticleItem>);
+            articlesList.push(<ArticleItem articleSmall={article}></ArticleItem>);
         });
     } catch (error) {
         console.error('Error fetching articles:', error);
     }
+
+     const pagination2={
+        page: 4,
+        pageSize: 10,
+        pageCount: 10,
+        total: 100,
+
+    };
 
     const breadcrumb = [
         {slug: "articles", title: "Articles"},
@@ -66,6 +83,7 @@ export default async function page({}: Props) {
 
     return (
         <main>
+
             <Menu/>
             <div className="  w-5/6 flex  flex-col items-left justify-left mx-auto mt-24 ">
                 <Breadcrumb breadcrumb={breadcrumb}/>
@@ -77,8 +95,14 @@ export default async function page({}: Props) {
             <div className=" h-full w-5/6 items-center justify-top mx-auto ">
                 {articlesList}
             </div>
-            <Footer/>
+            <div className=" mt-6 h-full w-5/6 items-center justify-center mx-auto ">
+                <Pagination
+                    page={pagination2.page}
+                    pageCount={pagination2.pageCount}
+                />
+            </div>
+                <Footer />
         </main>
-    )
+)
 
 }

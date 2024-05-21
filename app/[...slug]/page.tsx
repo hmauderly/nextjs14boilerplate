@@ -34,7 +34,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     {
         metadata.title= content.data[0].attributes.Title;
         metadata.description= content.data[0].attributes.Description;
+        metadata.robots= "index, follow";
         metadata.alternates= {canonical: getPathFromSlug(props.params.slug)};
+
     }
     return metadata;
 
@@ -44,11 +46,10 @@ export default async function page(props: Props) {
 
 // params { slug: [ 'slug1', 'slug2',...., 'slugN']}
     let content = null;
-    let page=null;
-    let slug = props.params.slug;
+    let article=null;
 
     try {
-        content = await fetchPage(-1,slug[slug.length-1],"slug",true);
+        content = await fetchPage(-1,props.params.slug[props.params.slug.length-1],"slug",true);
 
     } catch (e) {
         console.error("There was a problem retrieving article:", e);
@@ -58,9 +59,9 @@ export default async function page(props: Props) {
     if (content.status === 500 &&  !content.ok ) return Error(); // Erreur lors du call
     else if (content.status === 404 && !content.ok ) return notFound(); // Contenu API non trouvé
     else {
-        console.log("content", content.data[0].Image)
+
         try {
-            page =  await fillPageFromContent(content.data[0], slug);
+            article =  await fillPageFromContent(content.data[0], props.params.slug);
 
         } catch (e) {
             console.error("There was a problem filling article:", e);
@@ -70,16 +71,16 @@ export default async function page(props: Props) {
             <main>
                 <Menu/>
                 <div className="  w-5/6 flex  flex-col items-left justify-left mx-auto mt-24 ">
-                    <Breadcrumb breadcrumb={page.breadcrumb}/>
+                    <Breadcrumb breadcrumb={article.breadcrumb}/>
                 </div>
 
                 <div className="h-full w-5/6 flex  flex-col items-center  justify-top mx-auto  ">
 
-                    <h1 className="mt-10 text-3xl font-bold">{page.title}</h1>
+                    <h1 className="mt-10 text-3xl font-bold">{article.title}</h1>
                     <div className="article">
                         <article className=" prose-base prose-img:p-6  prose-img:mx-auto">
 
-                            <div dangerouslySetInnerHTML={{__html: page.htmlContent}}></div>
+                            <div dangerouslySetInnerHTML={{__html: article.htmlContent}}></div>
                         </article>
                     </div>
                 </div>

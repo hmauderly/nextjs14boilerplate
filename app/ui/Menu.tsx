@@ -1,6 +1,7 @@
 import React from "react";
 import Script from "next/script";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Menu() {
 
@@ -11,8 +12,8 @@ export default function Menu() {
 
 
             <nav className="bg-menu  text-white  ">
-                <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto mr-2 p-0">
-                    <a href="/" className="flex items-center space-x-3  rtl:space-x-reverse">
+                <div className="  max-w-screen-xl flex flex-wrap items-center justify-between mx-auto  p-0">
+                    <div className=""><a href="/" className="flex items-center space-x-3  rtl:space-x-reverse">
                         <Image
                             src="/assets/img/religio_ico_trans_ld.png"
                             width={60}
@@ -22,6 +23,8 @@ export default function Menu() {
                         />            <span
                             className="self-center text-2xl font-semibold whitespace-nowrap">RELIGIO.FR</span>
                     </a>
+                    </div>
+
                     <button data-collapse-toggle="navbar-multi-level" type="button"
                             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden hover:bg-menuhover focus:outline-none focus:ring-2 focus:ring-gray-200 "
                             aria-controls="navbar-multi-level" aria-expanded="false">
@@ -32,7 +35,8 @@ export default function Menu() {
                                   d="M1 1h15M1 7h15M1 13h15"/>
                         </svg>
                     </button>
-                    <div className="mx-4  hidden text-white  w-full md:block md:w-auto" id="navbar-multi-level">
+
+                    <div className=" mx-4  hidden text-white  w-full md:block md:w-auto" id="navbar-multi-level">
                         <ul className="flex flex-col font-medium  md:p-0   rounded-lg  md:space-x-4 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
                             <li>
                                 <div className="hover:bg-menuhover rounded-xl p-2">
@@ -69,7 +73,7 @@ export default function Menu() {
                                                 /></a>
                                             </div>
                                             <div
-                                                className="p-2 rounded hover:bg-menuhover font-semibold">
+                                                className="p-2 rounded hover:bg-menuhover ">
                                                 <a href="/religions/christianisme">Christianisme</a>
                                             </div>
                                         </div>
@@ -84,7 +88,7 @@ export default function Menu() {
                                                 /></a>
                                             </div>
                                             <div
-                                                className="p-2 rounded hover:bg-menuhover font-semibold">
+                                                className="p-2 rounded hover:bg-menuhover ">
                                                 <a href="/religions/islam">Islam</a>
                                             </div>
                                         </div>
@@ -99,7 +103,7 @@ export default function Menu() {
                                                 /></a>
                                             </div>
                                             <div
-                                                className="p-2 rounded hover:bg-menuhover font-semibold">
+                                                className="p-2 rounded hover:bg-menuhover ">
                                                 <a href="/religions/judaisme">Judaisme</a>
                                             </div>
                                         </div>
@@ -114,7 +118,7 @@ export default function Menu() {
                                                 /></a>
                                             </div>
                                             <div
-                                                className="p-2 rounded hover:bg-menuhover font-semibold">
+                                                className="p-2 rounded hover:bg-menuhover ">
                                                 <a href="/religions/bouddhisme">Bouddhisme</a>
                                             </div>
                                         </div>
@@ -129,13 +133,13 @@ export default function Menu() {
                                                 /></a>
                                             </div>
                                             <div
-                                                className="p-2 rounded hover:bg-menuhover font-semibold">
+                                                className="p-2 rounded hover:bg-menuhover ">
                                                 <a href="/religions/hindouisme">Hidouisme</a>
                                             </div>
                                         </div>
 
 
-                                        <div className="p-2 rounded hover:bg-menuhover text-center font-semibold">Autres
+                                        <div className="p-2 rounded hover:bg-menuhover text-center ">Autres
                                             religions
                                         </div>
 
@@ -158,7 +162,7 @@ export default function Menu() {
                                             className="w-2.5 h-2.5 ms-2.5" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none" viewBox="0 0 10 6">
-                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
                                                   strokeWidth="2" d="m1 1 4 4 4-4"/>
                                         </svg>
 
@@ -166,33 +170,33 @@ export default function Menu() {
                                     <div
                                         className="z-10 mt-2 flex flex-col bg-white text-gray-700 rounded-lg shadow w-60 invisible absolute group-hover:visible">
                                         <a href="/panorama/histoire-des-religions"
-                                           className="my-1 block  hover:rounded-l hover:bg-menuhover px-4 py-1 font-semibold md:mx-2">
-                                        L'histoire des
+                                           className="my-1 block  hover:rounded-l hover:bg-menuhover px-4 py-1  md:mx-2">
+                                            L'histoire des
                                             religions
                                         </a>
                                         <a href="/panorama/la-religion-expliquee-aux-enfants"
-                                           className="my-1 block  hover:rounded-l hover:bg-menuhover px-4 py-1 font-semibold md:mx-2">
-                                        La religion expliquée
+                                           className="my-1 block  hover:rounded-l hover:bg-menuhover px-4 py-1 md:mx-2">
+                                            La religion expliquée
                                             aux enfants
                                         </a>
                                         <a href="/panorama/figures-religieuses-importantes"
-                                           className="my-1 block  hover:rounded-l hover:bg-menuhover px-4 py font-semibold md:mx-2">
-                                        Figures religieuses
+                                           className="my-1 block  hover:rounded-l hover:bg-menuhover px-4 py  md:mx-2">
+                                            Figures religieuses
                                             importantes
                                         </a>
                                         <a href="/panorama/symboles"
-                                           className="my-1 block  hover:rounded-l hover:bg-menuhover px-4 py-1 font-semibold md:mx-2">
-                                        Symboles et rituels
+                                           className="my-1 block  hover:rounded-l hover:bg-menuhover px-4 py-1  md:mx-2">
+                                            Symboles et rituels
                                             religieux
                                         </a>
                                         <a href="/panorama/lieux-cultes-et-lieux-saints"
-                                           className="my-1 block  hover:rounded-l hover:bg-menuhover px-4 py-1 font-semibold md:mx-2">
-                                        Lieux de culte et
+                                           className="my-1 block  hover:rounded-l hover:bg-menuhover px-4 py-1  md:mx-2">
+                                            Lieux de culte et
                                             lieux saints
                                         </a>
                                         <a href="/panorama/textes"
-                                           className="my-2 block  hover:rounded-l hover:bg-menuhover px-4 py-1 font-semibold md:mx-2">
-                                        Textes sacrés et
+                                           className="my-2 block  hover:rounded-l hover:bg-menuhover px-4 py-1  md:mx-2">
+                                            Textes sacrés et
                                             livres religieux
                                         </a>
                                     </div>
@@ -209,8 +213,21 @@ export default function Menu() {
                             </li>
                             <li>
                                 <div className="hover:bg-menuhover  rounded-xl p-2">
-                                    <a href="#"
+                                    <a href="/ressources"
                                        className="block  rounded  hover:bg-menuhover  md:border-0  md:p-0  ">Ressources</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div className="hover:bg-menuhover rounded-xl p-3">
+
+                                    <a href="/search" rel="noindex, nofollow"
+                                       className="block  rounded  hover:bg-menuhover  md:border-0  md:p-0  ">
+                                    <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                         fill="none"
+                                         viewBox="0 0 20 20">
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                              strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                    </svg></a>
                                 </div>
                             </li>
 

@@ -1,12 +1,15 @@
 import React from "react";import Link from "next/link";
 import Image from "next/image";
-import {Article} from "@/app/interfaces/Article";
-import {ArticleProps} from "@/app/interfaces/interfaces";
+import {ArticleSmallProps, ArticleSmall} from "@/app/interfaces/interfaces";
 
 
-
-const ArticleItem: React.FC<ArticleProps> = ({ article }) => {
-    const { id, title, slug, PublishDate, description } = article;
+const ArticleItem: React.FC<ArticleSmallProps> = ({ articleSmall}) => {
+    const { id,
+        title,
+        slug,
+        PublishDate,
+        description,
+        imageUrl} = articleSmall;
 
     return (
         <div className="flex flex-wrap p-6 justify-center">
@@ -16,11 +19,11 @@ const ArticleItem: React.FC<ArticleProps> = ({ article }) => {
 
                 <div key={id} className=" w-full p-2 flex flex-row shadow-xl">
                     <div className=" w-1/6 flex flex-col items-center">
-                    <Link href={slug}>
+                    <Link href={"/articles/"+slug}>
                             <Image
-                                src={"http://51.15.200.107:1337/uploads/la_grotte_de_lourdes_avec_la_vierge_marie_hd_0e7d3e7ab0.jpeg"}
-                                width={120}
-                                height={120}
+                                src={"http://51.15.200.107:1337"+imageUrl}
+                                width={128}
+                                height={128}
                                 alt={title}
                                 className="object-cover"
                             />

@@ -11,6 +11,7 @@ export const fetchPage = async (id:number, slug: string, filter:string, populate
     const populateString = populate ? "&populate=*" : "";
     // If filter is id, we use the id, otherwise we use the last slug
     const filterString = filter === "id" ? id : slug ;
+
     // Compose Fect API url
     const url = new URL(API_URL + "/api/pages?filters["+filter+"][$eq]=" + filterString+populateString);
 
