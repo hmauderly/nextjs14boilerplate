@@ -6,7 +6,7 @@ function hasData(json: any, key: string): boolean {
 }
 
 
-export const fetchPage = async (id:number, slug: string, filter:string, populate : boolean) => {
+export const fetchPage = async (id:number, slug: string | null, filter:string, populate : boolean) => {
 
     const populateString = populate ? "&populate=*" : "";
     // If filter is id, we use the id, otherwise we use the last slug

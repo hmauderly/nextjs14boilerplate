@@ -6,12 +6,12 @@ function hasData(json: any, key: string): boolean {
 }
 
 
-export const fetchPages = async (categoryId:number,page : number, pageSize:number) => {
-    const paginationPage = "&pagination[" + page+"]";
-    const paginationSize = "&pagination["+pageSize+"]";
-    const paginationCount = "&pagination[false]";
+export const fetchPages = async (categoryId:number,page : number, pageSize:string) => {
+    const paginationPage = "&pagination[page]=" + page;
+    const paginationSize = "&pagination[pageSize]=" + pageSize;
+    const paginationCount = "&pagination[withCount]=true";
 
-    const url = new URL(API_URL + "/api/pages?filters[category][id][$eq]=" + categoryId+"&sort[0]=id:desc&fields[0]=title&fields[1]=PublishDate&fields[2]=description&fields[3]=slug&populate=*"+ paginationPage + paginationSize + paginationCount);
+    const url = new URL(API_URL + "/api/pages?filters[category][id][$eq]=" + categoryId+"&sort[0]=PublishDate:desc&fields[0]=title&fields[1]=PublishDate&fields[2]=description&fields[3]=slug&populate=*"+ paginationPage + paginationSize + paginationCount);
     let content = null;
 
     const options = {

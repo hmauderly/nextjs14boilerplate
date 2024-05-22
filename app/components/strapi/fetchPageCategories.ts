@@ -6,7 +6,6 @@ const TOKEN = process.env.STRAPI_API_TOKEN;
 function hasData(json: any, key: string): boolean {
     // Vérifie si la clé 'data' existe et contient au moins un élément
     if (json[key] && Array.isArray(json[key]) && json[key].length > 0) {
-        // Vous pouvez ajouter plus de validations ici si nécessaire
         return true;
     }
     return false;
@@ -15,8 +14,8 @@ function hasData(json: any, key: string): boolean {
 
 // export async function getPageBySlug(id: number) {
 export const fetchPageCategories = async () => {
-
     const url = new URL(API_URL + "/api/categories?pagination[pageSize]=100&populate=*");
+
     let content = null;
     const options = {
         headers: {'Authorization': `Bearer ${TOKEN}`},
@@ -110,10 +109,9 @@ export async function getBreadCrumbTitles(content):  string[] {
 
 
     try {
-        // On récupère les catégories
+        // We get all categories tree
         const categories = await fetchPageCategories();
-        console.log("####################")
-        console.log(categoryLevel)
+
         if (categoryLevel > 0) {
             categoryParentsTitle = getCategoryParents(categoryId, categories);
             breadcrumbTitles = concat([...categoryParentsTitle.filter(item => item !== 'Home').reverse(), categoryName, pageTitle]);
